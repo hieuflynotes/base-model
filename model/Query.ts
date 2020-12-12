@@ -1,8 +1,10 @@
+import { BaseModel } from "./BaseModel";
+
 export interface IQuery<T> {
   orderByField?: string[];
   searchs?: ISearch[];
   query?: T | any;
-  fields?: keyof T[];
+  fields?: (keyof T)[];
 }
 
 export interface IQueryWithPagination<T> extends IQuery<T> {
