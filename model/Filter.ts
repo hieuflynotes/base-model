@@ -7,11 +7,12 @@ import {
   opt,
   __,
 } from "@deckchair-technicians/vice";
+import { isArray, isString } from "lodash";
 import { BaseModel } from "./BaseModel";
 
 @data
 class Search {
-  fields?: string[] = __(opt(arrayof(isstring())));
+  searchFields?: string[] = __(opt(arrayof(isstring())));
   search?: string = __(opt(isstring()));
 }
 
@@ -35,12 +36,12 @@ export class CountFilter<T extends BaseModel> extends BaseFilter<T> {}
 export class ListFilter<T extends BaseModel> extends BaseFilter<T> {
   page?: number = __(opt(isnumber()));
   pageSize?: number = __(opt(isnumber()));
-  sort?: string = __(opt(isstring()));
+  sort?: string| string[] = __(opt(isstring().or(arrayof(isstring()))));
 }
 
 @data
 export class FindFilter<T extends BaseModel> extends BaseFilter<T> {
   limit?: number = __(opt(isnumber()));
   offset?: number = __(opt(isnumber()));
-  sort?: string = __(opt(isstring()));
+  sort?: string| string[] = __(opt(isstring().or(arrayof(isstring()))));
 }
