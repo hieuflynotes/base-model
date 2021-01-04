@@ -13,6 +13,8 @@ import { Status } from "./Status";
 export class BaseModel {
   id?: string = __(opt(isstring()));
   status?: Status = __(opt(isany()));
+  createdBy ?: string;
+  isDeleted ?: boolean;
   updatedBy?: string = __(opt(isuuid()));
   createdAt?: Date = __(opt(isoUtcDateTime()));
   updatedAt?: Date = __(opt(isoUtcDateTime()));
