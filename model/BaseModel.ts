@@ -1,6 +1,7 @@
 import {
   data,
   isany,
+  isboolean,
   isoUtcDateTime,
   isstring,
   isuuid,
@@ -12,7 +13,6 @@ import { Status } from "./Status";
 @data
 export class BaseModel {
   id?: string = __(opt(isstring()));
-  status?: Status = __(opt(isany()));
   createdBy ?: string;
   isDeleted ?: boolean;
   updatedBy?: string = __(opt(isuuid()));
