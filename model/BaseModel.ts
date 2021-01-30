@@ -1,21 +1,36 @@
-import {
-  data,
-  isany,
-  isboolean,
-  isoUtcDateTime,
-  isstring,
-  isuuid,
-  opt,
-  __,
-} from "@deckchair-technicians/vice";
-import { Status } from "./Status";
+import { _Define, __ } from "@BaseTypes/lib/SchemaBuilderAle";
+import { DataTypes, Sequelize } from "sequelize";
+import * as Yup from "yup";
 
-@data
 export class BaseModel {
-  id?: string = __(opt(isstring()));
-  createdBy ?: string;
-  isDeleted ?: boolean;
-  updatedBy?: string = __(opt(isuuid()));
-  createdAt?: Date = __(opt(isoUtcDateTime()));
-  updatedAt?: Date = __(opt(isoUtcDateTime()));
+	id?: string = __(
+		new _Define()
+			.setSequelize({primaryKey: true,type: DataTypes.UUID,})
+			.setYup(Yup.string().required().uuid())
+	);
+	createdBy?: string = __(
+		new _Define()
+			.setSequelize({type: DataTypes.UUID,field: "created_by",})
+			.setYup(Yup.string().uuid())
+	);
+	isDeleted?: boolean = __(
+		new _Define()
+			.setSequelize({type: DataTypes.BOOLEAN,field: "is_deleted",defaultValue: false,})
+			.setYup(Yup.boolean())
+	);
+	updatedBy?: string = __(
+		new _Define()
+			.setSequelize({type: DataTypes.UUID,field: "updated_by",})
+			.setYup(Yup.string().uuid())
+	);
+	createdAt?: Date = __(
+		new _Define()
+			.setSequelize({type: DataTypes.DATE,field: "created_at",defaultValue: Sequelize.literal("NOW()")})
+			.setYup(Yup.date())
+	);
+	updatedAt?: Date = __(
+		new _Define()
+			.setSequelize({type: DataTypes.DATE,field: "updated_at",defaultValue: Sequelize.literal("NOW()"),})
+			.setYup(Yup.date())
+	);
 }
