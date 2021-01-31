@@ -5,7 +5,7 @@ import * as Yup from "yup";
 export class BaseModel {
 	id?: string = __(
 		new _Define()
-			.setSequelize({primaryKey: true,type: DataTypes.UUID,})
+			.setSequelize({primaryKey: true,type: DataTypes.UUID,allowNull: false})
 			.setYup(Yup.string().required().uuid())
 	);
 	createdBy?: string = __(
