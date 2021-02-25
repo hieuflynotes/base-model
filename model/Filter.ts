@@ -20,6 +20,12 @@ class Search {
 class BaseFilter<T extends BaseModel> extends Search {
   query?: any = __(opt(isany()));
   fieldFilters?: Partial<T> = __(opt(isany()));
+  filter ?: FilterProps[] 
+}
+
+class FilterProps  {
+  filed?: string;
+  value ?: string[]
 }
 
 @data
